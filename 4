@@ -1,77 +1,291 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teste de Escopo com var 🧠</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abertura Sobrenatural — Para Ozias</title>
+  <meta name="description" content="Página estilo abertura de Sobrenatural com mensagem romântica para Ozias." />
 
-  <!-- Fonte estilosa -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+  <!-- Tipografias cinematográficas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Rubik', sans-serif;
-      background: linear-gradient(135deg, #fceabb, #f8b500);
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
+    :root{
+      --bg: #0b0d10;
+      --text: #e9eef2;
+      --accent: #85c0ff;       /* brilho frio */
+      --accent-ghost: #a6b8ff; /* brilho suave */
+      --shadow: rgba(0,0,0,.7);
+      --maxw: 1100px;
     }
 
-    .container {
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      max-width: 400px;
+    /* Reset elegante */
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      /* fundo com grão e vinheta */
+      background-image:
+        radial-gradient(1200px 600px at 10% -10%, rgba(133,192,255,.08) 0%, transparent 60%),
+        radial-gradient(1000px 500px at 90% 110%, rgba(133,192,255,.06) 0%, transparent 60%),
+        radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.9) 100%);
+      line-height: 1.6;
     }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
+    /* contêiner global */
+    .wrap{
+      display: grid;
+      min-height: 100%;
+      grid-template-rows: auto 1fr auto;
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      background-color: #ff9800;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    /* barra superior minimalista */
+    header{
+      position: sticky;
+      top:0;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.35), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      z-index: 50;
+    }
+    .brand{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: .8rem 1rem;
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+    }
+    .brand-logo{
+      width:28px; height:28px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:50%;
+      box-shadow: 0 0 24px rgba(133,192,255,.25) inset, 0 0 18px rgba(133,192,255,.15);
+      position:relative;
+    }
+    .brand-logo::before{
+      content:'';
+      position:absolute; inset:6px;
+      border:1px solid rgba(133,192,255,.35);
+      border-radius:50%;
+      filter: blur(.5px);
+    }
+    .brand-title{
+      font-family:'Cinzel', serif;
+      letter-spacing:.06em;
+      font-size: .95rem;
+      color: #cfe4ff;
+      text-shadow: 0 0 12px rgba(133,192,255,.2);
     }
 
-    button:hover {
-      background-color: #e68900;
+    /* seção hero com “abertura” */
+    .hero{
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: calc(100vh - 64px);
+      overflow:hidden;
     }
 
-    #resultado {
-      margin-top: 20px;
-      font-size: 1.3em;
+    /* efeito de fumaça em camadas */
+    .fog, .fog::before, .fog::after{
+      content:'';
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(220px 80px at 10% 20%, rgba(160,180,200,.07) 0%, transparent 70%),
+        radial-gradient(180px 70px at 80% 40%, rgba(160,180,200,.06) 0%, transparent 70%),
+        radial-gradient(260px 90px at 40% 80%, rgba(160,180,200,.05) 0%, transparent 75%);
+      filter: blur(12px) saturate(120%);
+      animation: drift 26s linear infinite;
+      opacity:.55;
+    }
+    .fog::before{
+      animation-duration: 38s;
+      animation-direction: reverse;
+      opacity:.45;
+    }
+    .fog::after{
+      animation-duration: 52s;
+      opacity:.35;
+    }
+    @keyframes drift{
+      0%   { transform: translate3d(0,0,0) scale(1.02); }
+      50%  { transform: translate3d(2%, -1%, 0) scale(1.04); }
+      100% { transform: translate3d(0,0,0) scale(1.02); }
+    }
+
+    /* pentagrama fantasma no fundo (sutil) */
+    .sigil{
+      position:absolute;
+      width: 72vmin; height:72vmin;
+      opacity:.08;
+      filter: blur(.8px);
+    }
+    .sigil svg{
+      width:100%; height:100%;
+      stroke: #cfe4ff;
+      stroke-width:.8;
+      fill: none;
+    }
+
+    /* título com efeito de flicker/glitch */
+    .title{
+      position: relative;
+      text-align:center;
+      z-index: 10;
+      padding: 0 1.2rem;
+      max-width: 900px;
+    }
+    .title h1{
+      font-family:'Cinzel', serif;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      letter-spacing:.12em;
+      font-weight:700;
+      margin: 0 0 .8rem 0;
+      color: #eaf2ff;
+      text-shadow:
+        0 0 22px rgba(133,192,255,.35),
+        0 0 2px rgba(255,255,255,.9);
+      animation: flicker 7s ease-in-out infinite;
+    }
+    .title h1::after{
+      /* leve fantasma azul para duplicação */
+      content: attr(data-ghost);
+      position:absolute;
+      left:0; right:0; top:0;
+      color: var(--accent-ghost);
+      opacity:.12;
+      transform: translate3d(2px,2px,0);
+      filter: blur(.6px);
+      pointer-events:none;
+    }
+    @keyframes flicker{
+      0%, 10%   { opacity:.84; }
+      11%       { opacity:.62; }
+      12%       { opacity:.88; }
+      13%       { opacity:.55; }
+      14%, 40%  { opacity:.92; }
+      41%       { opacity:.68; }
+      42%       { opacity:.9; }
+      70%,100%  { opacity:.96; }
+    }
+
+    .title p.lead{
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+      color: #cfe4ff;
+      opacity:.9;
+      margin:0 auto 1.2rem auto;
+    }
+
+    /* frase para Ozias */
+    .message{
+      margin: 1.2rem auto 0 auto;
+      background: linear-gradient(to bottom right, rgba(255,255,255,.05), rgba(133,192,255,.08));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 0 24px rgba(133,192,255,.15),
+        inset 0 0 8px rgba(133,192,255,.08);
+      border-radius: 14px;
+      padding: clamp(1rem, 3vw, 1.4rem);
+      max-width: 760px;
+    }
+    .message blockquote{
+      margin:0;
+      font-family:'Cinzel', serif;
+      font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+      letter-spacing:.02em;
+      color: #eaf2ff;
+    }
+    .message cite{
+      display:block;
+      margin-top:.8rem;
+      font-size: .95rem;
+      color:#bcd6ff;
+      opacity:.9;
+    }
+
+    /* dicas/rodapé */
+    footer{
+      margin-top: 2rem;
+      border-top:1px solid rgba(255,255,255,.06);
+      background: linear-gradient(to top, rgba(0,0,0,.35), transparent);
+    }
+    .footer-content{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1.2rem 1rem 2rem 1rem;
+      display:grid;
+      gap: .6rem;
+    }
+    .note{
+      font-size:.95rem;
+      color:#a9c5e8;
+    }
+
+    /* acessibilidade e responsividade */
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    @media (max-width: 640px){
+      .brand-title{ font-size:.9rem; }
+      .message{ border-radius: 12px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Teste de Escopo com <code>var</code> 🧪</h1>
-    <p>Vamos descobrir se a variável <strong>mensagem</strong> é acessível fora do bloco <code>if</code>! 🤔</p>
-    <button onclick="mostrarMensagem()">Executar Função 🚀</button>
-    <div id="resultado"></div>
+  <div class="wrap">
+    <header aria-label="barra superior">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <div class="brand-title">Abertura — Sobrenatural</div>
+      </div>
+    </header>
+
+    <main class="hero" role="main">
+      <!-- fumaça em movimento -->
+      <div class="fog" aria-hidden="true"></div>
+
+      <!-- sigilo pentagrama sutil -->
+      <div class="sigil" aria-hidden="true">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <!-- círculo -->
+          <circle cx="50" cy="50" r="46"></circle>
+          <!-- estrela de cinco pontas -->
+          <path d="M50 6 L61.8 38.2 L96 38.2 L68.2 58.6 L79.4 92 L50 72 L20.6 92 L31.8 58.6 L4 38.2 L38.2 38.2 Z"></path>
+        </svg>
+      </div>
+
+      <!-- título e mensagem -->
+      <section class="title" aria-label="título e mensagem principal">
+        <h1 data-ghost="SUPERNATURAL">SUPERNATURAL</h1>
+        <p class="lead">Um tributo em estilo de abertura — com luz fria, fumaça e um toque de mistério.</p>
+
+        <div class="message" aria-label="mensagem para Ozias">
+          <blockquote>
+            Ozias, no silêncio entre um mundo e outro, é no teu abraço que o impossível descansa e a escuridão aprende a ser luz.
+          </blockquote>
+          <cite>— Para o meu amor, hoje e sempre</cite>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p class="note">
+          Dica: para publicar, salve este arquivo como <strong>index.html</strong> e abra no navegador ou envie para qualquer hospedagem estática.
+        </p>
+        <p class="note">
+          Personalize o título, cores e a frase como quiser — tudo está neste único arquivo com CSS integrado e animações leves.
+        </p>
+      </div>
+    </footer>
   </div>
-
-  <script>
-    function mostrarMensagem() {
-      if (true) {
-        var mensagem = "✅ A variável 'mensagem' foi declarada dentro do bloco if.";
-      }
-
-      // Testando se está acessível fora do bloco
-      document.getElementById("resultado").textContent = mensagem + " E sim, ela está acessível aqui fora! 🎉";
-    }
-  </script>
 </body>
 </html>
